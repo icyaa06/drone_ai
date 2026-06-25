@@ -18,7 +18,23 @@ def load_env(path=BASE_DIR / ".env"):
 
 load_env()
 
-DATABASE_URI = os.getenv("DATABASE_URI", "postgresql+psycopg2://postgres:postgres@localhost/drone_ai_db")
+
+def normalize_database_uri(value):
+    if not value:
+        return value
+    value = value.strip()
+    if value.startswith("postgres://"):
+        value = "postgresql://" + value[len("postgres://"):]
+    if value.startswith("postgresql://"):
+        value = "postgresql+psycopg2://" + value[len("postgresql://"):]
+    return value
+
+
+DATABASE_URI = normalize_database_uri(
+    os.getenv("DATABASE_URI")
+    or os.getenv("DATABASE_URL")
+    or "postgresql+psycopg2://postgres:postgres@localhost/drone_ai_db"
+)
 SECRET_KEY = os.getenv("SECRET_KEY", "development-only-change-me")
 ADMIN_PASSWORD = os.getenv("ADMIN_PASSWORD", "change-me-drone-2026")
 MAX_CONTENT_LENGTH = int(os.getenv("MAX_CONTENT_LENGTH_MB", "25")) * 1024 * 1024

@@ -50,7 +50,8 @@ Tables are created automatically on first start. Uploaded files are stored under
 
 4. Set environment variables in the hosting dashboard:
 
-   - `DATABASE_URI=postgresql+psycopg2://USER:PASSWORD@HOST:PORT/DBNAME`
+   - `DATABASE_URL=` paste the Render/Railway PostgreSQL internal connection string
+   - Or use `DATABASE_URI=postgresql+psycopg2://USER:PASSWORD@HOST:PORT/DBNAME`
    - `SECRET_KEY=` a long random value
    - `ADMIN_PASSWORD=` a new strong admin password
    - `FLASK_DEBUG=false`
@@ -62,6 +63,8 @@ Tables are created automatically on first start. Uploaded files are stored under
    - Start command: `gunicorn app:app`
 
 6. Open `/api/health` on the deployed URL. It should return `"database":"connected"`.
+
+If deploy logs mention `localhost:5432`, the production database variable is not set correctly. `localhost` only works on your own laptop; Render needs the hosted PostgreSQL connection string from its dashboard.
 
 Important: this app currently stores uploaded participant documents in the local `uploads/` folder. That is fine for local use and simple single-server hosting, but for production with redeploys or multiple servers, move uploads to object storage such as S3, Cloudflare R2, or Supabase Storage.
 
