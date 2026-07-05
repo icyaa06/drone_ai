@@ -215,6 +215,20 @@ body {
   font-family:Manrope,Arial,sans-serif;
   letter-spacing:-.035em;
 }
+.info-panel h2 span {
+  display:block;
+  margin-top:10px;
+  font-size:28px;
+  line-height:1.15;
+  color:#d8e6ff;
+  letter-spacing:-.03em;
+}
+.rules-title {
+  font:800 48px/1.08 Manrope,Arial,sans-serif;
+  letter-spacing:-.045em;
+  margin:16px 0 35px;
+  color:#07111f;
+}
 
 .mission-card {
   min-height:270px;
@@ -329,6 +343,57 @@ body {
   color:#07111f;
 }
 
+#faq {
+  position:relative;
+  overflow:hidden;
+  background:
+    radial-gradient(circle at 18% 12%,rgba(47,111,216,.18),transparent 28%),
+    linear-gradient(180deg,#f7f9fd 0%,#edf3fb 100%);
+}
+#faq:before {
+  content:"";
+  position:absolute;
+  width:360px;
+  height:360px;
+  border-radius:50%;
+  right:-130px;
+  top:80px;
+  background:rgba(29,95,191,.10);
+}
+#faq .shell {
+  position:relative;
+}
+#faq .split > div:first-child {
+  padding:34px;
+  border:1px solid #dce1e9;
+  border-radius:28px;
+  background:linear-gradient(180deg,#fff,#f7faff);
+  box-shadow:0 18px 55px rgba(7,17,31,.06);
+}
+.faq-title {
+  font:800 54px/1.05 Manrope,Arial,sans-serif;
+  letter-spacing:-.055em;
+  margin:16px 0 16px;
+  color:#07111f;
+}
+.faq-lead {
+  color:#5f6874;
+  margin:0;
+}
+#faq .accordion {
+  padding:10px 28px;
+  border:1px solid #dce1e9;
+  border-radius:28px;
+  background:#fff;
+  box-shadow:0 18px 55px rgba(7,17,31,.06);
+}
+#faq .acc-button {
+  font-size:17px;
+}
+#faq .acc-item:last-child {
+  border-bottom:0;
+}
+
 .criteria .criterion {
   background:rgba(255,255,255,.42);
   border-left:1px solid #dce1e9;
@@ -415,8 +480,92 @@ body {
   .stage { min-height:auto; }
   .brand-logo { height:32px; max-width:150px; }
   .hero h1 { font-size:44px; }
+  .rules-title,
+  .faq-title { font-size:38px; }
+  .info-panel h2 span { font-size:22px; }
+}
+
+@media (prefers-reduced-motion:no-preference) {
+  .drone {
+    animation:droneFloat 4.2s ease-in-out infinite;
+  }
+  .drone-photo-one {
+    animation:cardFloatA 7s ease-in-out infinite;
+  }
+  .drone-photo-two {
+    animation:cardFloatB 8.5s ease-in-out infinite;
+  }
+  .orbital:before {
+    animation:softSpin 28s linear infinite;
+  }
+  .orbital:after {
+    animation:softSpinReverse 34s linear infinite;
+  }
+  .orbit-label {
+    animation:labelDrift 5.5s ease-in-out infinite;
+  }
+  .pulse {
+    animation:pulseDot 2.4s ease-in-out infinite;
+  }
+  .hero-fact,
+  .mini-card,
+  .mission-card,
+  .stage,
+  .criterion,
+  #faq .accordion,
+  #faq .split > div:first-child {
+    transition:transform .25s ease, box-shadow .25s ease, border-color .25s ease;
+  }
+  .hero-fact:hover,
+  .mini-card:hover,
+  .stage:hover,
+  .criterion:hover,
+  #faq .accordion:hover,
+  #faq .split > div:first-child:hover {
+    transform:translateY(-5px);
+    box-shadow:0 28px 70px rgba(7,17,31,.14);
+  }
+  .mission-icon {
+    animation:iconBreathe 3.6s ease-in-out infinite;
+  }
+  .btn {
+    transition:transform .2s ease, box-shadow .2s ease, background .2s ease;
+  }
+}
+
+@keyframes droneFloat {
+  0%,100% { transform:translateY(0) rotate(0deg); }
+  50% { transform:translateY(-16px) rotate(2deg); }
+}
+@keyframes cardFloatA {
+  0%,100% { transform:translateY(0) rotate(8deg); }
+  50% { transform:translateY(-18px) rotate(10deg); }
+}
+@keyframes cardFloatB {
+  0%,100% { transform:translateY(0) rotate(-11deg); }
+  50% { transform:translateY(14px) rotate(-8deg); }
+}
+@keyframes softSpin {
+  to { transform:rotate(360deg); }
+}
+@keyframes softSpinReverse {
+  to { transform:rotate(-360deg); }
+}
+@keyframes labelDrift {
+  0%,100% { transform:translateY(0); }
+  50% { transform:translateY(-7px); }
+}
+@keyframes pulseDot {
+  0%,100% { transform:scale(1); box-shadow:0 0 0 5px rgba(47,111,216,.16), 0 0 28px rgba(47,111,216,.55); }
+  50% { transform:scale(1.25); box-shadow:0 0 0 12px rgba(47,111,216,.10), 0 0 38px rgba(47,111,216,.70); }
+}
+@keyframes iconBreathe {
+  0%,100% { transform:translateY(0); }
+  50% { transform:translateY(-5px); }
 }
 /* === End DronED visual polish v3 === */
+
+
 
 
 
