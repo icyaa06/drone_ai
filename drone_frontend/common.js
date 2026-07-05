@@ -1,11 +1,11 @@
 const API = '/api';
-const STATUS_LABELS = {submitted:'Заявка подана',screening:'Технический скрининг',stage2:'Stage 2 — прототип',regional_review:'Региональный отбор',finalist:'Финалист',declined:'Не прошла отбор'};
+const STATUS_LABELS = {submitted:'Заявка подана',screening:'Технический скрининг',stage2:'Stage 2 — прототип',regional_review:'Отбор городского центра',finalist:'Финалист',declined:'Не прошла отбор'};
 const MISSION_LABELS = {
-  wildfire:'Wildfire Detection - forest fire detection on 100+ km²',
-  agriculture:'Precision Agriculture - crop monitoring on 1000+ ha',
-  rescue:'Search & Rescue - search over 50+ km²',
-  medical:'Medical Delivery - essential cargo over 15+ km',
-  infrastructure:'Infrastructure Monitoring - critical infrastructure inspection'
+  wildfire:'Wildfire Early Detection (раннее обнаружение пожаров)',
+  agriculture:'Precision Agriculture (точное земледелие)',
+  rescue:'Search & Rescue (поиск и спасение)',
+  medical:'Medical Delivery (медицинская доставка)',
+  infrastructure:'Infrastructure Monitoring (мониторинг инфраструктуры)'
 };
 
 async function api(path, options={}) {

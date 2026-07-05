@@ -22,20 +22,13 @@ from models import ApplicationUpload, ChallengeApplication, TeamMember
 BASE_DIR = Path(__file__).resolve().parent
 FRONTEND_DIR = BASE_DIR / "drone_frontend"
 MISSIONS = {
-    "wildfire": "Wildfire Detection - forest fire detection on 100+ km²",
-    "agriculture": "Precision Agriculture - crop monitoring on 1000+ ha",
-    "rescue": "Search & Rescue - search over 50+ km²",
-    "medical": "Medical Delivery - essential cargo over 15+ km",
-    "infrastructure": "Infrastructure Monitoring - critical infrastructure inspection",
+    "wildfire": "Wildfire Early Detection (раннее обнаружение пожаров)",
+    "agriculture": "Precision Agriculture (точное земледелие)",
+    "rescue": "Search & Rescue (поиск и спасение)",
+    "medical": "Medical Delivery (медицинская доставка)",
+    "infrastructure": "Infrastructure Monitoring (мониторинг инфраструктуры)",
 }
-REGIONS = [
-    "Астана", "Алматы", "Шымкент", "Абайская область", "Акмолинская область",
-    "Актюбинская область", "Алматинская область", "Атырауская область",
-    "Восточно-Казахстанская область", "Жамбылская область", "Жетысуская область",
-    "Западно-Казахстанская область", "Карагандинская область", "Костанайская область",
-    "Кызылординская область", "Мангистауская область", "Павлодарская область",
-    "Северо-Казахстанская область", "Туркестанская область", "Улытауская область",
-]
+REGIONS = ["Астана", "Алматы", "Шымкент"]
 STATUSES = {"submitted", "screening", "stage2", "regional_review", "finalist", "declined"}
 EXTENSIONS = {".pdf", ".doc", ".docx", ".png", ".jpg", ".jpeg"}
 MAX_FILE_SIZE = 10 * 1024 * 1024
@@ -165,7 +158,10 @@ def create_application():
             raise ValueError("Проверьте email лидера команды")
         mission = text("mission", limit=64)
         if mission not in MISSIONS:
-            raise ValueError("Выберите миссию из списка")
+            raise ValueError("Выберите направление из списка")
+        city_center = text("region", limit=80)
+        if city_center not in REGIONS:
+            raise ValueError("Выберите городской центр из списка")
         video_url = text("video_url", limit=500)
         repository_url = text("repository_url", required=False, limit=500)
         if not valid_url(video_url) or not valid_url(repository_url):
@@ -177,7 +173,7 @@ def create_application():
             application = ChallengeApplication(
                 tracking_code=tracking_code(),
                 team_name=text("team_name", limit=50),
-                region=text("region", limit=80),
+                region=city_center,
                 institution=text("institution", limit=180),
                 leader_name=text("leader_name", limit=160),
                 leader_specialization=text("leader_specialization", limit=180),
